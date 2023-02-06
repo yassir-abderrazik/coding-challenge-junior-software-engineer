@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\File\File;
 
 class ImageManager
 {
-
     public function __construct(
         private FilesystemManager $filesystemManager,
     ) {
