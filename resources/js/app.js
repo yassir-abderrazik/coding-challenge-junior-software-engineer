@@ -9,10 +9,7 @@ import './bootstrap';
 import { createApp } from 'vue';
 import * as vueRouter from 'vue-router';
 import { routes } from './routes';
-
-
 import App from './components/App.vue';
-
 
 const router = vueRouter.createRouter({
     history: vueRouter.createWebHistory(),
