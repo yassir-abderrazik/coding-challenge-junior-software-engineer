@@ -2,21 +2,36 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
+use App\Services\ProductService;
+use Tests\TestHelpers;
 
-class ProductTest extends TestCase
+class ProductTest extends TestHelpers
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-    public function test_example()
+    private ProductService $productService;
+    
+    public function test_create_product()
     {
-        $response = $this->get('/');
+        $file = new \Illuminate\Http\UploadedFile(
+            storage_path('app/public/avatar.jpg'),
+            'avatar.jpg',
+            'image/jpeg',
+            null,
+            true
+        );
+        $category = $this->create_category('Category 1');
+        $product = $this->create_product(
+            'Product 1',
+            'Product 1 description',
+            100,
+            $file,
+            [$category->id]
+        );
+        $this->assertDatabaseCount('products', 1);
+    }
 
-        $response->assertStatus(200);
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->productService = $this->app->make('App\Services\ProductService');
     }
 }
