@@ -5,12 +5,18 @@
  */
 
 import './bootstrap';
-import { createApp } from 'vue';
 
+import { createApp } from 'vue';
+import * as vueRouter from 'vue-router';
+import { routes } from './routes';
 
 
 import App from './components/App.vue';
 
-const app = createApp(App);
 
-app.mount('#app');
+const router = vueRouter.createRouter({
+    history: vueRouter.createWebHistory(),
+    routes
+});
+
+createApp(App).use(router).mount('#app');
