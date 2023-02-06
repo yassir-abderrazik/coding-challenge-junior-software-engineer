@@ -2,13 +2,10 @@
 
 namespace Tests\Feature;
 
-use App\Services\ProductService;
 use Tests\TestHelpers;
 
 class ProductTest extends TestHelpers
-{
-    private ProductService $productService;
-    
+{    
     public function test_create_product()
     {
         $file = new \Illuminate\Http\UploadedFile(
@@ -27,11 +24,5 @@ class ProductTest extends TestHelpers
             [$category->id]
         );
         $this->assertDatabaseCount('products', 1);
-    }
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->productService = $this->app->make('App\Services\ProductService');
     }
 }
