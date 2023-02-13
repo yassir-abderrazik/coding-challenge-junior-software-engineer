@@ -2,12 +2,17 @@
 
 namespace App\Repositories\CategoryProduct;
 
-use App\Models\Product;
+use App\Models\CategoryProduct;
 
 class CategoryProductRepository implements CategoryProductRepositoryInterface
 {
-    public function addProductCategories($productId, $categories): array
+    public function addProductCategories(int $productId, array $categories): void
     {
-        return Product::query()->find($productId)->categories()->sync($categories);
+        foreach ($categories as $category) {
+            CategoryProduct::create([
+                'category_id' => $category,
+                'product_id' => $productId,
+            ]);
+        }
     }
 }

@@ -5,5 +5,5 @@ namespace App\Repositories\CategoryProduct;
 
 interface CategoryProductRepositoryInterface
 {
-    public function addProductCategories($productId, array $categories): array;
+    public function addProductCategories(int $productId, array $categories): void;
 }

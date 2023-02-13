@@ -11,8 +11,8 @@ class CategoryProductManager
     ) {
     }
 
-    public function addProductCategories($productId, $categories): array
+    public function addProductCategories(int $productId, array $categories): void
     {
-        return $this->categoryProductRepository->addProductCategories($productId, $categories);
+        $this->categoryProductRepository->addProductCategories($productId, $categories);
     }
 }
