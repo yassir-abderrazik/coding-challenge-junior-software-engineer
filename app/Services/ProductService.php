@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Http\Requests\CreateProductRequest;
 use App\Manager\CategoryProductManager;
 use App\Manager\ProductManager;
 use App\Models\Product;
@@ -19,6 +20,8 @@ class ProductService
 
     public function createProduct(string $name, string $description, float $price, File $image, array $categories = []): Product
     {
+        new CreateProductRequest(['name' => $name, 'description' => $description, 'price' => $price, 'image' => $image, 'categories' => $categories]);
+        app()->make(CreateProductRequest::class);
         $path = $this->imageService->saveImage($image);
         $product = $this->productManager->createProduct(['name' => $name, 'description' => $description, 'price' => $price, 'image' => $path]);
         if ($categories) {
