@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateCategoryRequest;
 use App\Http\Resources\CategoryResource;
 use App\Services\CategoryService;
+use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {    
@@ -18,7 +18,7 @@ class CategoryController extends Controller
         return CategoryResource::collection($this->categoryService->getCategories());
     }
 
-    public function store(CreateCategoryRequest $request)
+    public function store(Request $request)
     {
         return $this->categoryService->createCategory($request->name, $request->parent_category ?? 0);
     }

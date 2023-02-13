@@ -2,9 +2,9 @@
 
 namespace App\Services;
 
+use App\Http\Requests\CreateCategoryRequest;
 use App\Manager\CategoryManager;
 use App\Models\Category;
-use App\Validators\CategoryValidator;
 use Illuminate\Database\Eloquent\Collection;
 
 class CategoryService
@@ -26,6 +26,9 @@ class CategoryService
 
     public function createCategory(string $name, int $parent): Category
     {
+        new CreateCategoryRequest(['name' => $name, 'parent_category' => $parent]);
+        app()->make(CreateCategoryRequest::class);
+
         return $this->categoryManager->createCategory(['name' => $name, 'parent_category' => $parent ? $parent : null]);
     }
 
